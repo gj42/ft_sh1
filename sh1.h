@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/01 16:12:31 by gjensen           #+#    #+#             */
-/*   Updated: 2015/04/26 20:32:05 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/06 11:25:48 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include <sys/stat.h>
 
 typedef struct stat t_stat;
-
 void	sh_loop(char **env);
 void	sh_prompt(char **env);
 void	fork_process(char *path, char **env, char **av);
@@ -44,7 +43,12 @@ void	sh_builtin_env(char **av, char ***env);
 void	sh_builtin_setenv(char **av, char ***env);
 void	sh_builtin_setenv_add(char *name, char *value, char ***env);
 void	sh_builtin_setenv_replace(char *name, char *value, char **env);
+void	sh_builtin_setenv_mng(char *name, char *value, char ***env);
 void	sh_builtin_unsetenv(char **av, char ***env);
 void	sh_free_memory(char *line, char **av, char **paths);
-char	**sh_save_env(char **env);
+char	**sh_save_env(char ***env);
+void	sh_signals(void);
+void	sh_wrong_exit(int signum, char *son);
+pid_t	save_cpid(pid_t *father);
+char	*sh_replace_home(char *path, char **env);
 #endif

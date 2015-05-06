@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/01 16:11:32 by gjensen           #+#    #+#             */
-/*   Updated: 2015/04/15 20:21:37 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/06 12:42:41 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int		sh_isbin(char *path)
 	if (lstat(path, &filestat) == -1)
 		state = 0;
 	else if (S_ISDIR(filestat.st_mode))
+		state = 1;
+	else if (S_ISLNK(filestat.st_mode))
 		state = 1;
 	else if (S_ISREG(filestat.st_mode))
 		state = 2;
@@ -57,8 +59,16 @@ char	*sh_search_bin(char *line, char *dirpath)
 
 void	sh_prompt(char **env)
 {
-	(void)env;
-	ft_putstr("$> ");
+	char buf[1024];
+
+	if (env && *env)
+	{
+		ft_putstr("--Minishell% ");
+		if (getcwd(buf, 1024))
+			ft_putstr(sh_replace_home(buf, env)),ft_putstr("% ");
+		ft_putchar('\n');
+		ft_putstr("$> ");
+	}
 }
 
 void	sh_execute_bin(char **av, char **env, char **paths)
@@ -67,24 +77,35 @@ void	sh_execute_bin(char **av, char **env, char **paths)
 	char	*cmd;
 	char	*str;
 	int		found;
+	char	**option;
+	int		n;
 
-	found = 0;
-	i = 0;
-	if (paths)
+	n = 0;
+	if (!av || !env || !(*av))
+		return ;
+	while (av[n])
 	{
-		while (paths[i])
+		found = 0;
+		i = 0;
+		option = ft_strsplit(av[n], ' ');
+		if (paths)
 		{
-			if ((cmd = sh_search_bin(av[0], paths[i])) != NULL)
-				fork_process(cmd, env, av), ft_strdel(&cmd), found = 1;
-			i++;
+			while (paths[i])
+			{
+				if ((cmd = sh_search_bin(option[0], paths[i])) != NULL)
+					fork_process(cmd, env, option), ft_strdel(&cmd), found = 1;
+				i++;
+			}
 		}
-	}
-	if (sh_isbin(av[0]) == 2)
-		fork_process(av[0], env, av), found = 1;
-	if (found == 0 && av[0])
-	{
-		str = ft_strjoin("ft_minishell1 : command not found: ", av[0]);
-		ft_putendl_fd(str, 2);
-		ft_strdel(&str);
-	}
+		if (sh_isbin(option[0]) == 2)
+			fork_process(option[0], env, option), found = 1;
+		if (found == 0 && option[0])
+		{
+			str = ft_strjoin("ft_minishell1: command not found: ", option[0]);
+			ft_putendl_fd(str, 2);
+			ft_strdel(&str);
+		}
+		n++;
+		ft_arrfree(&option);
+	}	
 }

@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/10 17:31:03 by gjensen           #+#    #+#             */
-/*   Updated: 2015/04/22 18:53:02 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/04 22:45:50 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@ void	sh_builtin_setenv_add(char *name, char *value, char ***env)
 	char	*new_str;
 
 	i = 0;
-	if ((new_env =(char**)malloc(sizeof(char*) * (ft_arrlen(*env) + 2))) == NULL)
+	if ((new_env = (char**)malloc(sizeof(char*) * (ft_arrlen(*env) + 2))) == NULL)
 		return ;
 	while ((*env)[i])
 		new_env[i] = (*env)[i], i++;
 	new_str = ft_strjoin(name, "=");
 	new_env[i] = ft_strjoin(new_str, value);
 	new_env[++i] = NULL;
-	*env = new_env;
 	ft_strdel(&new_str);
+	free(*env);
+	*env = new_env;
 }
 
 void	sh_builtin_setenv_replace(char *name,char *value, char **env)

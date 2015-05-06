@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/06 19:18:34 by gjensen           #+#    #+#             */
-/*   Updated: 2015/04/20 17:39:07 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/06 11:54:21 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,34 @@ void	sh_builtin_exit(char **av)
 
 int		sh_search_builtin(char **av, char ***env)
 {
-	int state;
+	int		state;
+	char	**option;
+	int n;
 
-	state = 0;
-	if (av[0])
+	if (!av || !env || !(*av))
+		return (0);
+	n = 0;
+	while (av[n])
 	{
-		if (ft_strcmp(av[0], "cd") == 0)
-			sh_builtin_cd(av, env), state = 1;
-		else if (ft_strcmp(av[0], "exit") == 0)
-			sh_builtin_exit(av), state = 1;
-		else if (ft_strcmp(av[0], "env") == 0)
-			sh_builtin_env(av, env), state = 1;
-		else if (ft_strcmp(av[0], "setenv") == 0)
-			sh_builtin_setenv(av, env), state = 1;
-		else if (ft_strcmp(av[0], "unsetenv") == 0)
-			sh_builtin_unsetenv(av, env), state = 1;
-	}
+		state = 0;
+		option = ft_strsplit(av[n], ' ');
+		if (option[0])
+		{
+			if (ft_strcmp(option[0], "cd") == 0)
+				sh_builtin_cd(option, env), state = 1;
+			else if (ft_strcmp(option[0], "exit") == 0)
+				sh_builtin_exit(option), state = 1;
+			else if (ft_strcmp(option[0], "env") == 0)
+				sh_builtin_env(option, env), state = 1;
+			else if (ft_strcmp(option[0], "setenv") == 0)
+				sh_builtin_setenv(option, env), state = 1;
+			else if (ft_strcmp(option[0], "unsetenv") == 0)
+				sh_builtin_unsetenv(option, env), state = 1;
+			else if (ft_strcmp(option[0], "clear") == 0)
+				ft_putstr("\033[1;1H\033[2J"), state = 1;
+		}
+		ft_arrfree(&option);
+		n++;
+	}	
 	return (state);
 }

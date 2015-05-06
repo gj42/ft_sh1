@@ -6,11 +6,27 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/02 19:50:26 by gjensen           #+#    #+#             */
-/*   Updated: 2015/04/22 18:47:46 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/06 12:41:47 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh1.h"
+
+
+char	*sh_replace_home(char *path, char **env)
+{
+	char *home_path;
+	char *pos;
+
+	home_path = sh_get_env("HOME", env);
+	if ((pos = ft_strstr(path, home_path)))
+	{
+		path[0] = '~';
+		path[1] = 0;
+		ft_strcat(path, pos + ft_strlen(home_path));
+	}
+	return (path);
+}
 
 int		sh_get_env_pos(char *find, char **env)
 {

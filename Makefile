@@ -6,25 +6,26 @@
 #    By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/04/01 15:26:04 by gjensen           #+#    #+#              #
-#    Updated: 2015/04/20 17:39:22 by gjensen          ###   ########.fr        #
+#    Updated: 2015/05/04 21:42:19 by gjensen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_minishell1
 
-SRC = main.c command.c envmanage.c sh_builtins.c sh_builtin_cd.c sh_builtin_env.c sh_builtin_setenv.c sh_builtin_unsetenv.c
+SRC = main.c command.c envmanage.c sh_builtins.c sh_builtin_cd.c sh_builtin_env.c sh_builtin_setenv.c sh_builtin_unsetenv.c signals.c \
+	  childsignals.c
 
 OBJ = $(SRC:.c=.o)
 
-#CFLAGS = -Werror -Wextra -Wall -I libft/includes
-CFLAGS = -I libft/includes -g
+CFLAGS = -Werror -Wextra -Wall -I libft/includes
+#CFLAGS = -I libft/includes -g
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft/ fclean
 	make -C libft/
-	gcc $(CFLAGS) -o $(NAME) $(OBJ) -L libft/ -lft -L. libefence.a
+	gcc $(CFLAGS) -o $(NAME) $(OBJ) -L libft/ -lft #-L. libefence.a
 
 clean:
 	rm -rf $(OBJ)
