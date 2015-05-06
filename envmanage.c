@@ -6,12 +6,24 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/02 19:50:26 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/06 12:41:47 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/06 20:53:46 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh1.h"
 
+char	**sh_save_env(char ***env)
+{
+	static char	**save;
+
+	if (env && *env)
+	{
+		save = *env;
+		return (NULL);
+	}
+	else
+		return (save);
+}
 
 char	*sh_replace_home(char *path, char **env)
 {

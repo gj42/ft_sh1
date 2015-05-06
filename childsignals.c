@@ -6,12 +6,11 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/30 21:00:55 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/01 18:55:27 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/06 20:57:20 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh1.h"
-
 
 static void	sh_wrong_exit2(int signum)
 {

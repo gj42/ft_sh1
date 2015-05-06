@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/01 16:11:32 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/06 12:42:41 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/06 20:58:23 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		sh_isbin(char *path)
 	else if (S_ISDIR(filestat.st_mode))
 		state = 1;
 	else if (S_ISLNK(filestat.st_mode))
-		state = 1;
+		state = 3;
 	else if (S_ISREG(filestat.st_mode))
 		state = 2;
 	return (state);
@@ -63,10 +63,12 @@ void	sh_prompt(char **env)
 
 	if (env && *env)
 	{
+		ft_putstr("\033[1;38m");
 		ft_putstr("--Minishell% ");
 		if (getcwd(buf, 1024))
-			ft_putstr(sh_replace_home(buf, env)),ft_putstr("% ");
+			ft_putstr(sh_replace_home(buf, env)), ft_putstr("% ");
 		ft_putchar('\n');
+		ft_putstr("\033[0m");
 		ft_putstr("$> ");
 	}
 }
@@ -107,5 +109,5 @@ void	sh_execute_bin(char **av, char **env, char **paths)
 		}
 		n++;
 		ft_arrfree(&option);
-	}	
+	}
 }

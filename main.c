@@ -6,13 +6,13 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/01 16:08:36 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/06 12:41:36 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/06 21:04:01 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh1.h"
 
-void	fork_process(char *path, char **env, char **av)
+void		fork_process(char *path, char **env, char **av)
 {
 	pid_t	father;
 	int		stat_loc;
@@ -21,7 +21,6 @@ void	fork_process(char *path, char **env, char **av)
 	save_cpid(&father);
 	if (father != -1)
 	{
-		
 		if (father == 0)
 		{
 			if (execve(path, av, env) == -1)
@@ -47,7 +46,7 @@ static void	free_memory(char *line, char **paths, char **av)
 		ft_arrfree(&paths);
 }
 
-void	sh_loop(char **env)
+void		sh_loop(char **env)
 {
 	char	*line;
 	char	**paths;
@@ -62,7 +61,7 @@ void	sh_loop(char **env)
 		if (get_next_line(0, &line) <= 0)
 			exit(0);
 		av = ft_strsplit(line, ';');
-		paths = sh_parse_env("PATH",sh_env);	
+		paths = sh_parse_env("PATH", sh_env);	
 		if (!sh_search_builtin(av, &sh_env))
 			sh_execute_bin(av, sh_env, paths);
 		free_memory(line, av, paths);

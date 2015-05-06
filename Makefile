@@ -6,7 +6,7 @@
 #    By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/04/01 15:26:04 by gjensen           #+#    #+#              #
-#    Updated: 2015/05/04 21:42:19 by gjensen          ###   ########.fr        #
+#    Updated: 2015/05/06 20:53:49 by gjensen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ SRC = main.c command.c envmanage.c sh_builtins.c sh_builtin_cd.c sh_builtin_env.
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = -Werror -Wextra -Wall -I libft/includes
-#CFLAGS = -I libft/includes -g
+#CFLAGS = -Werror -Wextra -Wall -I libft/includes
+CFLAGS = -I libft/includes -g
 
 all: $(NAME)
 
