@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/14 12:09:12 by gjensen           #+#    #+#             */
-/*   Updated: 2015/04/17 20:01:22 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/09 19:25:36 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static size_t	ft_count_word(char *s, char c)
 	return (word);
 }
 
-static int	ft_splitstr(char **tab, char *s, char c, size_t len)
+static int		ft_splitstr(char **tab, char *s, char c, size_t len)
 {
 	size_t	count;
 	size_t	wordlen;
@@ -58,7 +58,7 @@ static int	ft_splitstr(char **tab, char *s, char c, size_t len)
 	return (1);
 }
 
-char		**ft_strsplit(char const *s, char c)
+char			**ft_strsplit(char const *s, char c)
 {
 	char	**ret;
 	size_t	len;

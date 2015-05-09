@@ -6,7 +6,7 @@
 	#    By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+         #
 	#                                                 +#+#+#+#+#+   +#+            #
 	#    Created: 2014/11/03 12:29:01 by gjensen           #+#    #+#              #
-#    Updated: 2015/05/09 16:22:21 by gjensen          ###   ########.fr        #
+#    Updated: 2015/05/09 19:02:03 by gjensen          ###   ########.fr        #
 	#                                                                              #
 	# **************************************************************************** #
 
@@ -79,7 +79,8 @@ SRC =	ft_putchar.c \
 		ft_arrcpy.c \
 		ft_arrlen.c \
 		ft_arrfree.c \
-		ft_joinarray.c
+		ft_joinarray.c \
+		ft_epur_tab.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -1,30 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arrcpy.c                                        :+:      :+:    :+:   */
+/*   ft_epur_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/04/02 19:05:29 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/09 19:30:24 by gjensen          ###   ########.fr       */
+/*   Created: 2015/05/09 18:38:22 by gjensen           #+#    #+#             */
+/*   Updated: 2015/05/09 19:27:23 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_arrcpy(char **arr)
+char	*ft_epur_tab(char *str)
 {
-	char	**new_arr;
-	t_uint	pos;
+	char	*ret;
+	int		i;
+	int		n;
 
-	if (!(new_arr = (char**)malloc(sizeof(char*) * (ft_arrlen(arr) + 1))))
-		return (NULL);
-	pos = 0;
-	while (arr && arr[pos])
+	i = 0;
+	n = 0;
+	while (str[i])
 	{
-		new_arr[pos] = ft_strdup(arr[pos]);
-		pos++;
+		if (str[i] == '\t')
+			n++;
+		i++;
 	}
-	new_arr[pos] = NULL;
-	return (new_arr);
+	if (!(ret = (char*)malloc(sizeof(char) * ((ft_strlen(str) + 1) - n))))
+		return (NULL);
+	i = 0;
+	n = 0;
+	while (str[i])
+	{
+		while (str[i] == '\t' && str[i])
+			i++;
+		ret[n] = str[i];
+		i++, n++;
+	}
+	ret[n] = 0;
+	return (ret);
 }

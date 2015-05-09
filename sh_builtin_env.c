@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/12 16:43:20 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/09 17:36:38 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/09 18:25:23 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void		sh_builtin_env(char **av, char ***env)
 	else
 		new_env = ft_arrcpy(*env);
 	if (av[i] || ft_strchr(av[i], '='))
-		sh_builtin_setenv(av, env);
-	sh_builtin_env_exec(av, *env, i);
+		sh_builtin_setenv(av, &new_env);
+	sh_builtin_env_exec(av, new_env, i);
 	ft_arrfree(&new_env);
 }
