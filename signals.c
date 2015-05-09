@@ -6,13 +6,13 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/26 20:29:35 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/06 20:50:05 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/09 17:41:21 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh1.h"
 
-pid_t	save_cpid(pid_t *father)
+pid_t		save_cpid(pid_t *father)
 {
 	static pid_t save;
 
@@ -25,7 +25,7 @@ pid_t	save_cpid(pid_t *father)
 		return (save);
 }
 
-static	void	sh_signal_handle(int signum)
+static void	sh_signal_handle(int signum)
 {
 	char	**env;
 	pid_t	cpid;
@@ -39,10 +39,10 @@ static	void	sh_signal_handle(int signum)
 			if (env)
 			{
 				ft_putchar('\n');
-				sh_prompt(env);
+				sh_prompt(&env);
 			}
 		}
-	}	
+	}
 }
 
 static void	sh_sig_to_exit(int signum)
@@ -75,7 +75,7 @@ static void	sh_signals2(void)
 	signal(SIGUSR2, sh_sig_to_exit);
 }
 
-void	sh_signals(void)
+void		sh_signals(void)
 {
 	signal(SIGINT, sh_signal_handle);
 	signal(SIGHUP, sh_sig_to_exit);

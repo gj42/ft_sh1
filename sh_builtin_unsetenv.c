@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_builtin_unsetenv.c                                 :+:      :+:    :+:   */
+/*   sh_builtin_unsetenv.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/04/20 17:16:26 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/04 22:46:48 by gjensen          ###   ########.fr       */
+/*   Created: 2015/05/09 17:39:04 by gjensen           #+#    #+#             */
+/*   Updated: 2015/05/09 17:40:18 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void	sh_builtin_delete(int n, char **av, char ***env)
 	int		i;
 
 	i = 0;
-	if ((new_env =(char**)malloc(sizeof(char*) * (ft_arrlen(*env)))) == NULL)
-			return ;
+	if ((new_env = (char**)malloc(sizeof(char*) * ft_arrlen(*env))) == NULL)
+		return ;
 	if ((n = sh_get_env_pos(av[1], *env)) && (*env)[n])
 	{
 		while ((*env)[i] && i < n)
@@ -35,7 +35,7 @@ static void	sh_builtin_delete(int n, char **av, char ***env)
 			new_env[i] = (*env)[i];
 			i++;
 		}
-		new_env[++i] = NULL;
+		new_env[i] = NULL;
 		free(*env);
 		*env = new_env;
 	}
@@ -43,7 +43,7 @@ static void	sh_builtin_delete(int n, char **av, char ***env)
 
 void		sh_builtin_unsetenv(char **av, char ***env)
 {
-	int 	i;
+	int		i;
 	int		n;
 
 	i = 0;
@@ -66,4 +66,3 @@ void		sh_builtin_unsetenv(char **av, char ***env)
 	else
 		ft_putendl_fd("unsetenv: wrong arg", 2);
 }
-

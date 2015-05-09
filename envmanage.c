@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/02 19:50:26 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/06 20:53:46 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/09 17:27:52 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		sh_get_env_pos(char *find, char **env)
 	i = 0;
 	while (env[i])
 	{
-		if (ft_strncmp(find, env[i], ft_strlen(find)) == 0)
+		if (ft_strncmp(find, env[i], ft_strchr(env[i], '=') - env[i]) == 0)
 			return (i);
 		i++;
 	}
@@ -61,7 +61,7 @@ char	*sh_get_env(char *find, char **env)
 	i = 0;
 	while (env[i])
 	{
-		if (ft_strncmp(find, env[i], ft_strlen(find)) == 0)
+		if (ft_strncmp(find, env[i], ft_strchr(env[i], '=') - env[i]) == 0)
 			return (ft_strchr(env[i], '=') + 1);
 		i++;
 	}

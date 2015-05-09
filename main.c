@@ -6,11 +6,28 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/01 16:08:36 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/06 21:04:01 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/09 17:54:10 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh1.h"
+
+void		sh_execute_cmd(char *line, char ***sh_env, char **paths)
+{
+	char	**av;
+	int		n;
+
+	av = ft_strsplit(line, ';');
+	n = 0;
+	while (av[n])
+	{
+		if (!sh_search_builtin(av[n], sh_env))
+			sh_execute_bin(av[n], sh_env, paths);
+		n++;
+	}
+	if (av)
+		ft_arrfree(&av);
+}
 
 void		fork_process(char *path, char **env, char **av)
 {
@@ -36,12 +53,10 @@ void		fork_process(char *path, char **env, char **av)
 	save_cpid(&father);
 }
 
-static void	free_memory(char *line, char **paths, char **av)
+static void	free_memory(char *line, char **paths)
 {
 	if (line)
 		ft_strdel(&line);
-	if (av)
-		ft_arrfree(&av);
 	if (paths)
 		ft_arrfree(&paths);
 }
@@ -51,24 +66,21 @@ void		sh_loop(char **env)
 	char	*line;
 	char	**paths;
 	char	**sh_env;
-	char	**av;
 
 	sh_env = ft_arrcpy(env);
 	while (42)
 	{
 		sh_save_env(&sh_env);
-		sh_prompt(sh_env);
+		sh_prompt(&sh_env);
 		if (get_next_line(0, &line) <= 0)
 			exit(0);
-		av = ft_strsplit(line, ';');
-		paths = sh_parse_env("PATH", sh_env);	
-		if (!sh_search_builtin(av, &sh_env))
-			sh_execute_bin(av, sh_env, paths);
-		free_memory(line, av, paths);
+		paths = sh_parse_env("PATH", sh_env);
+		sh_execute_cmd(line, &sh_env, paths);
+		free_memory(line, paths);
 	}
 }
 
-int		main(int ac, char **av, char **env)
+int			main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;

@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 13:55:14 by gjensen           #+#    #+#             */
-/*   Updated: 2015/04/02 19:45:30 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/09 16:21:05 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,5 @@ int					get_next_line(int const fd, char **line);
 int					ft_arrlen(char **arr);
 char				**ft_arrcpy(char **ar);
 void				ft_arrfree(char ***ar);
+char				*ft_joinarray(char **av);
 #endif

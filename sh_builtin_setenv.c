@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/10 17:31:03 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/04 22:45:50 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/09 17:38:44 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	sh_builtin_setenv_add(char *name, char *value, char ***env)
 	char	*new_str;
 
 	i = 0;
-	if ((new_env = (char**)malloc(sizeof(char*) * (ft_arrlen(*env) + 2))) == NULL)
+	if ((new_env = (char**)malloc(sizeof(char*)
+					* (ft_arrlen(*env) + 2))) == NULL)
 		return ;
 	while ((*env)[i])
 		new_env[i] = (*env)[i], i++;
@@ -31,10 +32,10 @@ void	sh_builtin_setenv_add(char *name, char *value, char ***env)
 	*env = new_env;
 }
 
-void	sh_builtin_setenv_replace(char *name,char *value, char **env)
+void	sh_builtin_setenv_replace(char *name, char *value, char **env)
 {
-	int 	pos;
-	char 	*new_env;
+	int		pos;
+	char	*new_env;
 	char	*new_val;
 
 	pos = sh_get_env_pos(name, env);
@@ -60,7 +61,7 @@ void	sh_builtin_setenv(char **av, char ***env)
 {
 	char	**splitvar;
 	int		i;
-	
+
 	i = 0;
 	if (!av || !env)
 		return ;

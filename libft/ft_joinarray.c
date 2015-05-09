@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arrcpy.c                                        :+:      :+:    :+:   */
+/*   ft_joinarray.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/04/02 19:05:29 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/09 15:09:53 by gjensen          ###   ########.fr       */
+/*   Created: 2015/05/09 16:14:27 by gjensen           #+#    #+#             */
+/*   Updated: 2015/05/09 17:10:14 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_arrcpy(char **arr)
+char	*ft_joinarray(char **av)
 {
-	char 	**new_arr;
-	t_uint	pos;
+	char	*ret;
+	int		i;
 
-	if ((new_arr =(char**)malloc(sizeof(char*) * (ft_arrlen(arr) + 1))) == NULL)
-		return (NULL);
-	pos = 0;
-	while (arr && arr[pos])
+	i = 1;
+	ret = av[0];
+	while (av[i])
 	{
-		new_arr[pos] = ft_strdup(arr[pos]);
-		pos++;
+		ft_strcat(ret, " ");
+		ft_strcat(ret, av[i]);
+		i++;
 	}
-	new_arr[pos] = NULL;
-	return (new_arr);
+	return (ret);
 }

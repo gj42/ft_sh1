@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/01 16:11:32 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/06 20:58:23 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/09 17:59:10 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*sh_search_bin(char *line, char *dirpath)
 	return (NULL);
 }
 
-void	sh_prompt(char **env)
+void	sh_prompt(char ***env)
 {
 	char buf[1024];
 
@@ -66,48 +66,37 @@ void	sh_prompt(char **env)
 		ft_putstr("\033[1;38m");
 		ft_putstr("--Minishell% ");
 		if (getcwd(buf, 1024))
-			ft_putstr(sh_replace_home(buf, env)), ft_putstr("% ");
+			ft_putstr(sh_replace_home(buf, *env)), ft_putstr("% ");
 		ft_putchar('\n');
 		ft_putstr("\033[0m");
 		ft_putstr("$> ");
 	}
 }
 
-void	sh_execute_bin(char **av, char **env, char **paths)
+void	sh_execute_bin(char *av, char ***env, char **paths)
 {
 	int		i;
 	char	*cmd;
-	char	*str;
 	int		found;
 	char	**option;
-	int		n;
 
-	n = 0;
 	if (!av || !env || !(*av))
 		return ;
-	while (av[n])
+	found = 0;
+	i = 0;
+	option = ft_strsplit(av, ' ');
+	if (paths)
 	{
-		found = 0;
-		i = 0;
-		option = ft_strsplit(av[n], ' ');
-		if (paths)
+		while (paths[i])
 		{
-			while (paths[i])
-			{
-				if ((cmd = sh_search_bin(option[0], paths[i])) != NULL)
-					fork_process(cmd, env, option), ft_strdel(&cmd), found = 1;
-				i++;
-			}
+			if ((cmd = sh_search_bin(option[0], paths[i])) != NULL)
+				fork_process(cmd, *env, option), ft_strdel(&cmd), found = 1;
+			i++;
 		}
-		if (sh_isbin(option[0]) == 2)
-			fork_process(option[0], env, option), found = 1;
-		if (found == 0 && option[0])
-		{
-			str = ft_strjoin("ft_minishell1: command not found: ", option[0]);
-			ft_putendl_fd(str, 2);
-			ft_strdel(&str);
-		}
-		n++;
-		ft_arrfree(&option);
 	}
+	if (sh_isbin(option[0]) == 2)
+		fork_process(option[0], *env, option), found = 1;
+	if (found == 0 && option[0])
+		sh_notfound(option[0]);
+	ft_arrfree(&option);
 }

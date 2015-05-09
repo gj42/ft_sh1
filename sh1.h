@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/01 16:12:31 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/06 20:51:46 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/09 18:00:34 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
-typedef struct stat t_stat;
+typedef struct stat	t_stat;
 void	sh_loop(char **env);
-void	sh_prompt(char **env);
+void	sh_prompt(char ***env);
 void	fork_process(char *path, char **env, char **av);
-void	sh_execute_bin(char **av, char **env, char **paths);
+void	sh_execute_bin(char *av, char ***env, char **paths);
 int		sh_get_env_pos(char *find, char **env);
 char	*sh_get_env(char *find, char **env);
 char	**sh_parse_env(char *find, char **env);
@@ -36,7 +36,7 @@ char	*sh_search_bin(char *line, char *dirpath);
 int		sh_access(char *path);
 int		sh_isbin(char *path);
 void	sh_builtin_exit(char **av);
-int		sh_search_builtin(char **av, char ***env);
+int		sh_search_builtin(char *av, char ***env);
 void	sh_builtin_cd(char **av, char ***env);
 void	sh_builtin_cd_open(char *dir, char ***env);
 void	sh_builtin_env(char **av, char ***env);
@@ -51,4 +51,6 @@ void	sh_signals(void);
 void	sh_wrong_exit(int signum, char *son);
 pid_t	save_cpid(pid_t *father);
 char	*sh_replace_home(char *path, char **env);
+void	sh_execute_cmd(char *line, char ***sh_env, char **paths);
+void	sh_notfound(char *av);
 #endif
