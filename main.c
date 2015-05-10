@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/01 16:08:36 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/09 19:01:40 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/09 19:51:56 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ void		sh_execute_cmd(char *line, char ***sh_env, char **paths)
 {
 	char	**av;
 	int		n;
+	char	*nl;
 
-	line = ft_epur_tab(line);
+	nl = ft_epur_tab(line);
 	av = ft_strsplit(line, ';');
 	n = 0;
 	while (av[n])
@@ -28,6 +29,8 @@ void		sh_execute_cmd(char *line, char ***sh_env, char **paths)
 	}
 	if (av)
 		ft_arrfree(&av);
+	if (nl)
+		ft_strdel(&nl);
 }
 
 void		fork_process(char *path, char **env, char **av)
