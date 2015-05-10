@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/01 16:08:36 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/09 19:51:56 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/10 20:31:12 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		sh_execute_cmd(char *line, char ***sh_env, char **paths)
 	char	*nl;
 
 	nl = ft_epur_tab(line);
-	av = ft_strsplit(line, ';');
+	av = ft_strsplit(nl, ';');
 	n = 0;
 	while (av[n])
 	{
