@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/02 19:50:26 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/09 19:53:07 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/10 20:19:57 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*sh_replace_home(char *path, char **env)
 	char *pos;
 
 	home_path = sh_get_env("HOME", env);
-	if ((pos = ft_strstr(path, home_path)))
+	if ((pos = ft_strstr(path, home_path)) && ft_strcmp("/", home_path) != 0)
 	{
 		path[0] = '~';
 		path[1] = 0;
