@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 17:39:04 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/09 17:40:18 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/11 18:34:14 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ static void	sh_builtin_delete(int n, char **av, char ***env)
 	i = 0;
 	if ((new_env = (char**)malloc(sizeof(char*) * ft_arrlen(*env))) == NULL)
 		return ;
-	if ((n = sh_get_env_pos(av[1], *env)) && (*env)[n])
+	if (((n = sh_get_env_pos(av[1], *env)) >= 0) && (*env)[n])
 	{
 		while ((*env)[i] && i < n)
 			new_env[i] = (*env)[i], i++;
 		free((*env)[i]);
-		while (*new_env && ((*env)[i] = (*env)[i + 1]))
+		while ((*env)[i] && ((*env)[i] = (*env)[i + 1]))
 		{
 			new_env[i] = (*env)[i];
 			i++;
