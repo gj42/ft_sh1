@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 18:38:22 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/09 19:27:23 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/11 17:47:36 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_epur_tab(char *str)
 	while (str[i])
 	{
 		while (str[i] == '\t' && str[i])
-			i++;
+			ret[n] = ' ', i++, n++;
 		ret[n] = str[i];
 		i++, n++;
 	}
