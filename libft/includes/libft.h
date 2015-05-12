@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 13:55:14 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/09 19:01:25 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/11 18:43:20 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
-# define BUFF_SIZE 8
+# define BUFF_SIZE 1024
 
 typedef unsigned int	t_uint;
 void				ft_putchar(char c);

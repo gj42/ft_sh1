@@ -6,7 +6,7 @@
 /*   By: gjensen <gjensen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/09 18:38:22 by gjensen           #+#    #+#             */
-/*   Updated: 2015/05/11 17:47:36 by gjensen          ###   ########.fr       */
+/*   Updated: 2015/05/12 17:19:51 by gjensen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,8 @@ char	*ft_epur_tab(char *str)
 
 	i = 0;
 	n = 0;
-	while (str[i])
-	{
-		if (str[i] == '\t')
-			n++;
-		i++;
-	}
-	if (!(ret = (char*)malloc(sizeof(char) * ((ft_strlen(str) + 1) - n))))
+	ret = NULL;
+	if (!(ret = (char*)malloc(sizeof(char) * (ft_strlen(str) + 1))))
 		return (NULL);
 	i = 0;
 	n = 0;
@@ -34,8 +29,11 @@ char	*ft_epur_tab(char *str)
 	{
 		while (str[i] == '\t' && str[i])
 			ret[n] = ' ', i++, n++;
-		ret[n] = str[i];
-		i++, n++;
+		if (str[i])
+		{
+			ret[n] = str[i];
+			i++, n++;
+		}
 	}
 	ret[n] = 0;
 	return (ret);
